@@ -145,7 +145,7 @@ Inclus :
 
 > Pour acheter votre licence, contactez directement :
 
-📧 **[contact@sosinfoludo.fr](mailto:contact@sosinfoludo.fr)**  
+📧 **[sosinfoludo@gmail.com](mailto:sosinfoludo@gmail.com)**  
 📱 **S.O.S INFO LUDO** — Boulogne-sur-Mer (62200)
 
 ---
@@ -187,7 +187,7 @@ Essai gratuit 30 jours disponible. Aucun remboursement après activation.
 
 | Canal | Contact |
 |-------|---------|
-| 📧 Email | contact@sosinfoludo.fr |
+| 📧 Email | sosinfoludo@gmail.com |
 | 🐛 Bug | [Ouvrir une issue](https://github.com/lerapeurdu62280-debug/repairpilot-pro/issues) |
 | 💬 Questions | [Discussions](https://github.com/lerapeurdu62280-debug/repairpilot-pro/discussions) |
 
@@ -206,7 +206,7 @@ Essai gratuit 30 jours disponible. Aucun remboursement après activation.
 
 <div align="center">
 
-**Fait avec ❤️ à Boulogne-sur-Mer par [S.O.S INFO LUDO](mailto:contact@sosinfoludo.fr)**
+**Fait avec ❤️ à Boulogne-sur-Mer par [S.O.S INFO LUDO](mailto:sosinfoludo@gmail.com)**
 
 *Ludovic Tourniquet — Technicien informatique indépendant*
 
