@@ -1,0 +1,73 @@
+{
+  "name": "repairpilot-pro",
+  "version": "1.0.0",
+  "description": "RepairPilot Pro — Le cockpit du technicien informatique par S.O.S INFO LUDO",
+  "main": "src/main/main.js",
+  "scripts": {
+    "start": "electron .",
+    "build:win": "electron-builder --win",
+    "build:mac": "electron-builder --mac",
+    "build:client": "electron-builder --win --config.productName=\"RepairPilot Pro\" --config.directories.output=dist-client --config.nsis.shortcutName=\"RepairPilot Pro\"",
+    "build:owner": "electron-builder --win --config.productName=\"RepairPilot Pro Owner\" --config.appId=\"fr.sosinfoludo.repairpilot.owner\" --config.directories.output=dist-owner --config.nsis.oneClick=true --config.nsis.allowToChangeInstallationDirectory=false --config.nsis.perMachine=false --config.nsis.shortcutName=\"RepairPilot Pro Owner\" --config.nsis.menuCategory=\"S.O.S INFO LUDO\" --config.nsis.runAfterFinish=true"
+  },
+  "keywords": [],
+  "author": "Ludovic Tourniquet — S.O.S INFO LUDO",
+  "license": "UNLICENSED",
+  "type": "commonjs",
+  "build": {
+    "appId": "fr.sosinfoludo.repairpilot",
+    "productName": "RepairPilot Pro",
+    "copyright": "© 2026 S.O.S INFO LUDO — Ludovic Tourniquet",
+    "directories": {
+      "output": "dist"
+    },
+    "win": {
+      "target": [
+        {
+          "target": "nsis",
+          "arch": [
+            "x64"
+          ]
+        }
+      ],
+      "icon": "assets/icon.ico"
+    },
+    "mac": {
+      "target": "dmg",
+      "icon": "assets/icon.icns",
+      "category": "public.app-category.utilities"
+    },
+    "nsis": {
+      "oneClick": false,
+      "allowToChangeInstallationDirectory": true,
+      "allowElevation": true,
+      "perMachine": false,
+      "createDesktopShortcut": true,
+      "createStartMenuShortcut": true,
+      "shortcutName": "RepairPilot Pro",
+      "menuCategory": "S.O.S INFO LUDO",
+      "deleteAppDataOnUninstall": false,
+      "runAfterFinish": true,
+      "installerLanguages": ["fr"],
+      "language": "1036"
+    },
+    "publish": {
+      "provider": "github",
+      "owner": "sosinfoludo",
+      "repo": "repairpilot-pro"
+    }
+  },
+  "devDependencies": {
+    "@electron/rebuild": "^4.0.3",
+    "electron": "^41.1.1",
+    "electron-builder": "^26.8.1",
+    "electron-icon-builder": "^2.0.1",
+    "jimp": "^1.6.1",
+    "png2icons": "^2.0.1"
+  },
+  "dependencies": {
+    "@anthropic-ai/sdk": "^0.82.0",
+    "electron-store": "^8.2.0",
+    "electron-updater": "^6.8.3"
+  }
+}
