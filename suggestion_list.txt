@@ -1,0 +1,69 @@
+Voici la liste complète, organisée par priorité et utilité pour ton métier :
+
+---
+
+## 🔴 Priorité haute — Utilité quotidienne
+
+| # | Fonctionnalité | Description |
+|---|---|---|
+| 1 | **Calculateur de marge** | Entres prix d'achat pièce → le logiciel calcule automatiquement le prix de vente selon ta marge souhaitée |
+| 2 | **Fiche réparation imprimable** | Bon de dépôt client à imprimer avec signature, description panne, IMEI, délai estimé |
+| 3 | **Statut réparation par SMS/Email** | Notifier automatiquement le client quand sa réparation est prête |
+| 4 | **Historique complet client** | Voir toutes les réparations passées d'un client en un clic |
+| 5 | **Recherche globale** | Chercher un client, une réparation, une pièce en stock depuis n'importe où |
+| 6 | **Sauvegarde automatique** | Export automatique de toutes les données en JSON ou Excel |
+
+---
+
+## 🟠 Priorité moyenne — Gain de temps
+
+| # | Fonctionnalité | Description |
+|---|---|---|
+| 7 | **Comparateur de prix multi-fournisseurs** | Chercher une référence → voir le prix chez tous tes fournisseurs en même temps |
+| 8 | **Favoris fournisseurs** | Épingler des pages précises chez un fournisseur (ex: catégorie iPhone) |
+| 9 | **Modèles de devis** | Créer des modèles réutilisables pour les réparations fréquentes |
+| 10 | **Rappels & alertes** | Alerte quand une réparation traîne depuis X jours |
+| 11 | **Mode sombre / clair** | Basculer entre thème clair Apple et thème sombre |
+| 12 | **Raccourcis clavier** | Ctrl+N = nouvelle réparation, Ctrl+F = recherche, etc. |
+| 13 | **Import contacts** | Importer une liste de clients depuis Excel/CSV |
+
+---
+
+## 🟡 Espace Technicien avancé
+
+| # | Fonctionnalité | Description |
+|---|---|---|
+| 14 | **Agenda / Planning** | Calendrier des réparations avec vue semaine |
+| 15 | **Rapport mensuel PDF** | Générer un récap mensuel : CA, nb réparations, clients, marges |
+| 16 | **Relances impayées** | Liste des devis non payés avec relance par email |
+| 17 | **Gestion des garanties** | Suivre les réparations sous garantie et leur date d'expiration |
+| 18 | **Fiches appareils** | Base de données des appareils réparés avec photos et historique |
+| 19 | **Objectifs mensuels** | Fixer un objectif de CA et voir la progression |
+
+---
+
+## 🟢 Intelligence Artificielle avancée
+
+| # | Fonctionnalité | Description |
+|---|---|---|
+| 20 | **IA suggère le prix de vente** | Basé sur la panne détectée + ta marge, l'IA propose un devis direct |
+| 21 | **Base de pannes intelligente** | L'IA mémorise les pannes que tu as réparées pour les retrouver plus vite |
+| 22 | **Recherche IA multi-fournisseurs** | Tu décris une pièce → l'IA ouvre automatiquement les bons fournisseurs |
+| 23 | **Aide diagnostic vocal** | Dicter la panne à l'IA au lieu de la taper |
+
+---
+
+## 🔵 Fonctionnalités futures / Premium
+
+| # | Fonctionnalité | Description |
+|---|---|---|
+| 24 | **Multi-techniciens** | Gérer une équipe, assigner des réparations à d'autres techs |
+| 25 | **Application mobile** | Version légère sur téléphone pour consulter les infos en déplacement |
+| 26 | **Portail client en ligne** | Le client suit l'avancement de sa réparation sur une page web |
+| 27 | **Caisse / TPE** | Encaissement direct dans le logiciel |
+| 28 | **Scan code-barres** | Scanner un code-barres via webcam pour identifier une pièce en stock |
+| 29 | **Mise à jour automatique** | Le logiciel se met à jour tout seul quand une nouvelle version sort |
+
+---
+
+**Par où tu veux commencer ?** Tu peux me donner les numéros qui t'intéressent le plus et je les développe dans l'ordre. 🚀

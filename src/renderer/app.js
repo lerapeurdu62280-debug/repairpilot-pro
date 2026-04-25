@@ -1187,11 +1187,17 @@ function pageRepairs() {
           const price=parseFloat(r.price||0);
           const acompte=parseFloat(r.acompte||0);
           const solde=price-acompte;
-          return `<div class="mac-table-row">
+          // Badge délai
+          const isActive = r.status==='En cours'||r.status==='En attente';
+          const daysOld = r.date ? Math.floor((Date.now()-new Date(r.date).getTime())/86400000) : 0;
+          const delayBadge = isActive && daysOld > 0
+            ? `<span style="font-size:9px;font-weight:700;padding:1px 6px;border-radius:10px;margin-left:4px;${daysOld>=14?'background:#EF4444;color:#fff':daysOld>=7?'background:#F59E0B;color:#1a1a1a':'background:rgba(255,255,255,.12);color:rgba(255,255,255,.6)'}">J+${daysOld}</span>`
+            : '';
+          return `<div class="mac-table-row" style="${isActive&&daysOld>=14?'border-left:3px solid #EF4444':isActive&&daysOld>=7?'border-left:3px solid #F59E0B':''}">
             <div style="flex:0.8"><span class="status-pill gray" style="font-size:9px">${r.ticketNum||('#'+String(r.id).slice(-6))}</span></div>
             <div style="flex:2"><strong>${r.device}</strong>${r.priority&&r.priority!=='Normal'?` <span class="status-pill ${r.priority==='Express'?'red':'orange'}" style="font-size:9px;padding:1px 5px">${r.priority}</span>`:''}<br/><span style="font-size:11px;color:var(--txt2)">${r.desc||''}</span></div>
             <div style="flex:1.5">${r.client}</div>
-            <div style="flex:1">${r.date}</div>
+            <div style="flex:1">${r.date}${delayBadge}</div>
             <div style="flex:1">${r.price?r.price+'€':'—'}${acompte>0?`<br/><span style="font-size:10px;color:var(--orange)">Solde: ${solde.toFixed(0)}€</span>`:''}</div>
             <div style="flex:1">${r.warrantyEnd?`<span class="status-pill ${isGarExpired?'gray':'green'}" style="font-size:9px">${isGarExpired?'Expirée':r.warrantyEnd}</span>`:'—'}</div>
             <div style="flex:1"><span class="status-pill ${r.status==='Terminé'?'green':r.status==='En cours'?'orange':r.status==='Non réparable'?'red':'gray'}">${r.status}</span></div>
@@ -2316,7 +2322,56 @@ function pageStats() {
   ${buildMonthlyChart()}
   ${buildTopDevices(repairs)}
   ${buildRentabilite(repairs)}
+  ${buildAdvancedStats(repairs)}
   <div class="spacer"></div>`;
+}
+
+function buildAdvancedStats(repairs) {
+  if (!repairs.length) return '';
+
+  // Taux de réussite
+  const done     = repairs.filter(r=>r.status==='Terminé').length;
+  const failed   = repairs.filter(r=>r.status==='Irréparable'||r.status==='Annulé').length;
+  const total    = repairs.length;
+  const successRate = total > 0 ? Math.round(done/total*100) : 0;
+
+  // Durée moyenne (jours) pour les réparations terminées avec date de création
+  const doneRepairs = repairs.filter(r=>r.status==='Terminé'&&r.createdAt&&r.closedAt);
+  let avgDays = '—';
+  if (doneRepairs.length) {
+    const totalMs = doneRepairs.reduce((s,r)=>s+(new Date(r.closedAt)-new Date(r.createdAt)),0);
+    avgDays = (totalMs/doneRepairs.length/86400000).toFixed(1);
+  }
+
+  // Top problèmes (par label/desc/device)
+  const faultMap = {};
+  repairs.forEach(r=>{
+    const key = r.label || r.desc || r.problem || r.device || 'Non précisé';
+    if (key) faultMap[key] = (faultMap[key]||0)+1;
+  });
+  const topFaults = Object.entries(faultMap).sort((a,b)=>b[1]-a[1]).slice(0,8);
+
+  const faultBars = topFaults.map(([label,n])=>`
+    <div style="display:flex;align-items:center;gap:8px;margin-bottom:8px">
+      <div style="min-width:160px;font-size:11px;color:var(--txt1);white-space:nowrap;overflow:hidden;text-overflow:ellipsis" title="${label}">${label}</div>
+      <div style="flex:1;background:rgba(199,125,255,.15);border-radius:4px;height:10px;overflow:hidden">
+        <div style="width:${Math.round(n/topFaults[0][1]*100)}%;background:var(--accent);height:100%;border-radius:4px"></div>
+      </div>
+      <strong style="min-width:28px;text-align:right;font-size:12px">${n}</strong>
+    </div>`).join('');
+
+  return `
+  <div class="sh"><div class="sh-title">🔬 Statistiques avancées</div></div>
+  <div class="stats" style="grid-template-columns:repeat(4,1fr)">
+    <div class="stat-card"><div class="stat-ico s-green">✅</div><div><div class="stat-val c-green">${successRate}%</div><div class="stat-lbl">Taux de réussite</div></div></div>
+    <div class="stat-card"><div class="stat-ico s-blue">⏱️</div><div><div class="stat-val c-blue">${avgDays}j</div><div class="stat-lbl">Durée moyenne</div></div></div>
+    <div class="stat-card"><div class="stat-ico s-orange">⚠️</div><div><div class="stat-val c-orange">${failed}</div><div class="stat-lbl">Irréparables / Annulés</div></div></div>
+    <div class="stat-card"><div class="stat-ico s-teal">🔧</div><div><div class="stat-val c-teal">${done}</div><div class="stat-lbl">Réparations réussies</div></div></div>
+  </div>
+  <div class="mac-card" style="padding:16px;margin-bottom:16px">
+    <div class="sh-title" style="margin-bottom:12px">🏆 Top pannes / problèmes les plus fréquents</div>
+    ${faultBars || '<div style="color:var(--txt2);text-align:center;padding:20px">Aucune donnée — Renseignez le problème dans chaque réparation</div>'}
+  </div>`;
 }
 
 // ═══════════════════════════════════════════════════════

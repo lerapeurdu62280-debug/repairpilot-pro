@@ -5,7 +5,15 @@ const crypto = require('crypto');
 const Store = require('electron-store');
 const { autoUpdater } = require('electron-updater');
 
-const store = new Store({ encryptionKey: 'repairpilot-sosinfoludo-2026' });
+// ── Load .env (secrets stay out of git) ──────────────────────────────────────
+try {
+  fs.readFileSync(path.join(__dirname, '../../.env'), 'utf8').split('\n').forEach(line => {
+    const m = line.match(/^([^#=\s][^=]*)=(.*)$/);
+    if (m) process.env[m[1].trim()] = m[2].trim();
+  });
+} catch(e) {}
+
+const store = new Store({ encryptionKey: process.env.STORE_KEY || 'repairpilot-sosinfoludo-2026' });
 
 // ── Build type (Owner vs Client) ─────────────────────────────────────
 // Triple détection : productName, execPath, et argv — robuste même si un seul fonctionne
@@ -22,7 +30,7 @@ if (IS_OWNER_BUILD) {
 }
 
 // ── Licence ─────────────────────────────────────────────────────────
-const LIC_SECRET = 'RP2026-PILOT-7xK9-SECURE-KEY';
+const LIC_SECRET = process.env.LICENSE_SECRET || '';
 const TRIAL_DAYS = 30;
 
 function validateLicenseKey(input) {
